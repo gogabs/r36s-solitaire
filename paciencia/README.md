@@ -29,6 +29,12 @@ Com cartas na mão, ao passar por uma pilha que aceita elas, o jogo diz
 "cabe". Regras de cada jogo: menu **Como jogar**, ou
 [docs/regras.md](docs/regras.md).
 
+## Tela
+
+A tela mostra a mesa e a última fala como legenda, com cores de alto contraste.
+É só um extra: tudo também é falado, e ela segue a opção de tela e a economia
+de energia do sistema. Veja [docs/graficos.md](docs/graficos.md).
+
 ## Rodar
 
 No PC (Windows), de dentro desta pasta:
@@ -45,9 +51,11 @@ No console, da raiz do repositório: `./instalar.sh r36s ../r36s-a11y-sdk pacien
 ```bash
 python3 -m unittest discover -s tests   # testes
 python3 tools/gerar_sons.py             # sons provisórios
+python3 tools/gerar_graficos.py         # imagens (precisa do Pillow, só no PC)
 ```
 
 A lógica fica em `paciencia/`: `base.py` tem o que os três jogos dividem
 (pilhas, foco, pegar e soltar, desfazer, dica, leitura da mesa, partida
 salva) e `klondike.py`, `freecell.py` e `spider.py` só as regras de cada um.
-Ela não toca som nem fala; `main.py` liga a partida ao SDK.
+Ela não toca som nem fala; `main.py` liga a partida ao SDK, e `desenho.py`
+desenha a mesa.

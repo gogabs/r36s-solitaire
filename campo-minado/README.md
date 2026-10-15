@@ -26,6 +26,12 @@ O tempo só corre depois da primeira escavação e para na pausa. O recorde de
 cada nível é o menor tempo. Mais detalhes no menu **Como jogar** ou em
 [docs/regras.md](docs/regras.md).
 
+## Tela
+
+A tela mostra a grade e a última fala como legenda, com cores de alto contraste.
+É só um extra: tudo também é falado, e ela segue a opção de tela e a economia
+de energia do sistema. Veja [docs/graficos.md](docs/graficos.md).
+
 ## Rodar
 
 No PC (Windows), de dentro desta pasta:
@@ -42,7 +48,9 @@ No console, da raiz do repositório: `./instalar.sh r36s ../r36s-a11y-sdk campo-
 ```bash
 python3 -m unittest discover -s tests   # testes
 python3 tools/gerar_sons.py             # sons provisórios
+python3 tools/gerar_graficos.py         # imagens (precisa do Pillow, só no PC)
 ```
 
 A lógica fica em `minado/` (`board.py` a grade, `run.py` a partida) e não
-toca som nem fala; `main.py` liga a partida ao SDK.
+toca som nem fala; `main.py` liga a partida ao SDK, e `desenho.py` desenha
+a grade.

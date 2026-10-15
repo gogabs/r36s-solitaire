@@ -15,6 +15,7 @@ import r36s_a11y as a11y
 from paciencia import GAMES, ORDER
 from paciencia import texts as T
 from paciencia.cards import plural
+from paciencia.desenho import Renderer
 
 game = a11y.Game(repeat=True)
 SAVE_FILE = os.path.join(game.save_dir, "progresso.json")
@@ -308,5 +309,9 @@ def quit_saving():
     if run is not None and not run.over:
         save_run(run)
 
+
+# Tela opcional: mostra a mesa e a última fala como legenda. Desliga sozinha
+# com a tela desligada no sistema ou se o vídeo falhar.
+Renderer(game, lambda: state["run"])
 
 game.run()

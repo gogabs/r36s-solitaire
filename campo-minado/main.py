@@ -14,6 +14,7 @@ import r36s_a11y as a11y
 
 from minado import texts as T
 from minado.board import LEVEL_ORDER, LEVELS
+from minado.desenho import Renderer
 from minado.run import Run, duration
 
 game = a11y.Game(repeat=True)
@@ -276,5 +277,9 @@ def quit_saving():
     if run is not None and not run.over:
         save_run(run)
 
+
+# Tela opcional: mostra a grade e a última fala como legenda. Desliga sozinha
+# com a tela desligada no sistema ou se o vídeo falhar.
+Renderer(game, lambda: state["run"])
 
 game.run()
