@@ -1,0 +1,11 @@
+{
+  "id": "paciencia",
+  "name": "Paciência",
+  "description": "Klondike, FreeCell e Spider, com as cartas faladas.",
+  "version": "0.1.0",
+  "contract": 1,
+  "runtime": "python3",
+  "exec": "main.py",
+  "languages": ["pt-BR"],
+  "author": "Gabs"
+}
