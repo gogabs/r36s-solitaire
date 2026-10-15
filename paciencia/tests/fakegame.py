@@ -6,6 +6,8 @@ import sys
 import tempfile
 import types
 
+os.environ["A11Y_GRAPHICS"] = "0"   # os testes não abrem a tela
+
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 sys.path.insert(0, ROOT)
 sys.path.insert(1, os.path.join(ROOT, ".."))   # a cópia da biblioteca na raiz do repositório
@@ -39,8 +41,12 @@ class FakeGame:
         FakeGame.instance = self
 
     def _hook(name):
-        def deco(self, fn):
-            self.handlers[name] = fn
+        def deco(self, fn):   # como no SDK, várias funções por evento
+            prev = self.handlers.get(name)
+            if prev is None:
+                self.handlers[name] = fn
+            else:
+                self.handlers[name] = lambda *a: (prev(*a), fn(*a))[-1]
             return fn
         return deco
 

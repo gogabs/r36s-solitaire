@@ -19,6 +19,9 @@ Start pausa, com continuar, salvar e sair, ou sair sem salvar; fechar o jogo
 no meio de uma partida guarda ela. Y fala a pontuação. Os controles de cada
 jogo estão no README da pasta e no menu **Como jogar**.
 
+Os dois jogos também têm tela, com cores de alto contraste, mas ela é só um
+extra: nada aparece nela sem ser falado.
+
 ## Instalar no console
 
 Com o SDK clonado ao lado deste repositório:
