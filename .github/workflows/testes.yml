@@ -1,0 +1,29 @@
+name: Testes
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  testes:
+    # Python 3.7 é o do console (ArkOS); 3.12 pega o que quebrar nas versões novas.
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.7", "3.12"]
+        jogo: [paciencia, campo-minado]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Testes
+        working-directory: ${{ matrix.jogo }}
+        run: python -m unittest discover -s tests -v
+      - name: Sons provisórios iguais aos do repositório
+        working-directory: ${{ matrix.jogo }}
+        run: |
+          python tools/gerar_sons.py
+          git diff --exit-code --stat -- sounds

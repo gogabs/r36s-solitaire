@@ -1,0 +1,11 @@
+{
+  "id": "campo-minado",
+  "name": "Campo Minado",
+  "description": "Abra as casas sem mina, ouvindo os números em volta.",
+  "version": "0.1.0",
+  "contract": 1,
+  "runtime": "python3",
+  "exec": "main.py",
+  "languages": ["pt-BR"],
+  "author": "Gabs"
+}
