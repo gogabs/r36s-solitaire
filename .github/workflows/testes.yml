@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         python: ["3.7", "3.12"]
-        jogo: [paciencia, campo-minado]
+        jogo: [paciencia, campo-minado, sudoku]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

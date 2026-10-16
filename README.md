@@ -7,6 +7,7 @@ Jogos solitaire para o R36S acessível, jogáveis só com som e fala. Cada pasta
 |---|---|
 | [`paciencia/`](paciencia/) | **Paciência**: Klondike, FreeCell e Spider sobre uma base comum |
 | [`campo-minado/`](campo-minado/) | **Campo Minado**: fácil, médio e difícil |
+| [`sudoku/`](sudoku/) | **Sudoku**: fácil, médio e difícil, com grades sorteadas |
 
 Feitos em Python com a biblioteca do
 [r36s-a11y-sdk](https://github.com/gogabs/r36s-a11y-sdk). A cópia de reserva da
@@ -19,7 +20,7 @@ Start pausa, com continuar, salvar e sair, ou sair sem salvar; fechar o jogo
 no meio de uma partida guarda ela. Y fala a pontuação. Os controles de cada
 jogo estão no README da pasta e no menu **Como jogar**.
 
-Os dois jogos também têm tela, com cores de alto contraste, mas ela é só um
+Os jogos também têm tela, com cores de alto contraste, mas ela é só um
 extra: nada aparece nela sem ser falado.
 
 ## Instalar no console
