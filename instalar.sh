@@ -13,7 +13,7 @@ HERE=$(cd "$(dirname "$0")" && pwd)
 SDK=${2:-$HERE/../r36s-a11y-sdk}
 shift $(( $# < 2 ? $# : 2 ))
 GAMES=("$@")
-[ ${#GAMES[@]} -gt 0 ] || GAMES=(paciencia campo-minado)
+[ ${#GAMES[@]} -gt 0 ] || GAMES=(paciencia campo-minado sudoku)
 SDK_PY="$SDK/python/r36s_a11y"
 if [ ! -d "$SDK_PY" ]; then
   SDK_PY="$HERE/r36s_a11y"

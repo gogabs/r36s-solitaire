@@ -1,0 +1,11 @@
+{
+  "id": "sudoku",
+  "name": "Sudoku",
+  "description": "Preencha a grade de 1 a 9 sem repetir, ouvindo cada número.",
+  "version": "0.1.0",
+  "contract": 1,
+  "runtime": "python3",
+  "exec": "main.py",
+  "languages": ["pt-BR"],
+  "author": "Gabs"
+}
