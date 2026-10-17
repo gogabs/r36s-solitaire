@@ -23,7 +23,7 @@ echo "SDK selecionada: $SDK_PY"
 
 for ID in "${GAMES[@]}"; do
   [ -f "$HERE/$ID/game.json" ] || { echo "Jogo desconhecido: $ID"; exit 1; }
-  if ssh "$HOST" "for p in /proc/[0-9]*; do readlink \"\$p/cwd\"; done 2>/dev/null | grep -q '^/opt/a11y/games/$ID'"; then
+  if ssh "$HOST" "for p in /proc/[0-9]*; do readlink \"\$p/cwd\"; done 2>/dev/null | grep -Eq '^/(roms|opt)/a11y/games/$ID(/|\$)'"; then
     echo "$ID está aberto no console. Feche o jogo e rode de novo."
     exit 1
   fi
@@ -42,10 +42,10 @@ done
 find "$PKG" -name __pycache__ -prune -exec rm -rf {} +
 
 tar -C "$PKG" -czf - "${GAMES[@]}" | ssh "$HOST" "
-  set -e; cd /opt/a11y/games
+  set -e; mkdir -p /roms/a11y/games; cd /roms/a11y/games
   rm -rf .solitarios.novo && mkdir .solitarios.novo
-  tar -xzf - -C .solitarios.novo
+  tar -xzmf - -C .solitarios.novo
   for ID in ${GAMES[*]}; do
-    rm -rf \$ID && mv .solitarios.novo/\$ID . && echo \"instalado: \$ID, \$(ls \$ID/sounds | wc -l) sons\"
+    rm -rf \$ID /opt/a11y/games/\$ID && mv .solitarios.novo/\$ID . && echo \"instalado: \$ID, \$(ls \$ID/sounds | wc -l) sons\"
   done
-  rmdir .solitarios.novo; df -h /opt/a11y | tail -1"
+  rmdir .solitarios.novo; df -h /roms | tail -1"
