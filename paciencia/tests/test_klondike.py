@@ -32,7 +32,7 @@ class NavigationTest(unittest.TestCase):
             run.step(1)
         self.assertEqual(run.pile, run.stock)     # deu a volta
         self.assertEqual(ui.played[-1], "borda")
-        self.assertTrue(ui.last.startswith("Estoque, 24 cartas"))
+        self.assertTrue(ui.last.startswith("24 cartas no estoque"))
 
     def test_up_down_inside_column(self):
         run, ui, _ = new(Klondike)
@@ -55,8 +55,29 @@ class NavigationTest(unittest.TestCase):
         clear(run)
         col = run.kind(COLUNA)[0]
         col.cards = [Card(1, 0), Card(2, 0)] + cards("9h 8s")
-        self.assertEqual(run.describe(col), "Coluna 1: 8 de espadas, 2 abertas, 2 viradas")
-        self.assertEqual(run.describe(run.kind(FUNDACAO)[0]), "Fundação de copas, vazia")
+        self.assertEqual(run.describe(col), "8 de espadas, 2 abertas e 2 viradas, coluna 1")
+        col.cards = [Card(1, 0)] + cards("9h")
+        self.assertEqual(run.describe(col), "9 de copas, 1 virada, coluna 1")
+        col.cards = cards("9h 8s")
+        self.assertEqual(run.describe(col), "8 de espadas, 2 cartas, coluna 1")
+        self.assertEqual(run.describe(run.kind(FUNDACAO)[0]), "Fundação de copas vazia")
+        run.kind(FUNDACAO)[0].cards = cards("1h 2h")
+        self.assertEqual(run.describe(run.kind(FUNDACAO)[0]), "2 de copas, fundação de copas")
+        run.waste.cards = cards("5c 7d")
+        self.assertEqual(run.describe(run.waste), "7 de ouros, 2 cartas, descarte")
+        self.assertEqual(run.describe(run.stock), "Estoque vazio")
+
+    def test_table_and_pile_text_say_cards_first(self):
+        run, ui, _ = new(Klondike)
+        clear(run)
+        run.kind(COLUNA)[0].cards = [Card(1, 0), Card(2, 0)] + cards("9h 8s")
+        run.kind(FUNDACAO)[0].cards = cards("1h")
+        text = run.table_text()
+        self.assertIn("Fundações: até o ás de copas; ouros vazia", text)
+        self.assertIn("8 de espadas com 2 viradas, coluna 1; coluna 2 vazia", text)
+        focus(run, run.kind(COLUNA)[0])
+        self.assertEqual(run.pile_text(),
+                         "De baixo para cima: 2 viradas, 9 de copas e 8 de espadas. Coluna 1.")
 
 
 class MoveTest(unittest.TestCase):

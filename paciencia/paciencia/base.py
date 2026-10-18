@@ -54,6 +54,10 @@ class Pile:
         """ "para a coluna 3", "para o descarte"."""
         return ("para a " if self.feminine else "para o ") + self.lower
 
+    def suit_name(self):
+        """ "copas", para a fundação de copas."""
+        return self.name.split(" ", 2)[-1]
+
 
 def the(card):
     """ "a dama de copas", "o 7 de paus"."""
@@ -163,22 +167,24 @@ class Solitaire:
 
     # --- falas ------------------------------------------------------------------
     def describe(self, p):
+        """Primeiro as cartas, depois o lugar: "8 de espadas, 2 abertas e 2 viradas, coluna 1"."""
         if p.kind == ESTOQUE:
-            return "%s, %s" % (p.name, plural(len(p.cards), "carta") if p.cards else "vazio")
+            return ("%s %s" % (plural(len(p.cards), "carta"), p.at())) if p.cards else p.name + " vazio"
         if not p.cards:
-            return "%s, %s" % (p.name, "vazia" if p.feminine else "vazio")
-        text = "%s: %s" % (p.name, p.top.name)
+            return "%s %s" % (p.name, "vazia" if p.feminine else "vazio")
+        text = p.top.name
         if p.kind == COLUNA:
             up = len(p.cards) - p.first_up()
             if p.down_count():
                 if up > 1:
-                    text += ", %d abertas" % up
-                text += ", %s" % plural(p.down_count(), "virada")
+                    text += ", %d abertas e %s" % (up, plural(p.down_count(), "virada"))
+                else:
+                    text += ", %s" % plural(p.down_count(), "virada")
             elif up > 1:
                 text += ", %d cartas" % up
         elif p.kind == DESCARTE and len(p.cards) > 1:
             text += ", %s" % plural(len(p.cards), "carta")
-        return text
+        return "%s, %s" % (cap(text), p.lower)
 
     def announce_pile(self, prefix=""):
         p = self.pile
@@ -432,15 +438,21 @@ class Solitaire:
                 parts.append(self.describe(piles[0]) + ".")
                 continue
             items = []
-            for k, p in enumerate(piles):
-                tag = p.name.split(" ", 2)[-1] if kind == FUNDACAO else str(k + 1)
-                top = p.top.name if p.cards else ("vazia" if p.feminine else "vazio")
-                if kind == FUNDACAO and p.cards:
-                    top = "até " + the(p.top)
-                if kind == COLUNA and p.down_count():
-                    top += " com %d virada%s" % (p.down_count(), "" if p.down_count() == 1 else "s")
-                items.append("%s, %s" % (tag, top))
-            parts.append("%s: %s." % (label, "; ".join(items)))
+            for p in piles:
+                if not p.cards:
+                    items.append("%s %s" % (p.suit_name() if kind == FUNDACAO else p.lower,
+                                            "vazia" if p.feminine else "vazio"))
+                elif kind == FUNDACAO:
+                    items.append("até " + the(p.top))
+                else:
+                    top = p.top.name
+                    if kind == COLUNA and p.down_count():
+                        top += " com %d virada%s" % (p.down_count(), "" if p.down_count() == 1 else "s")
+                    items.append("%s, %s" % (top, p.lower))
+            if kind == FUNDACAO:
+                parts.append("%s: %s." % (label, "; ".join(items)))
+            else:
+                parts.append(cap("; ".join(items)) + ".")
         return " ".join(parts)
 
     def pile_text(self):
@@ -449,10 +461,10 @@ class Solitaire:
         if p.kind != COLUNA or not p.cards:
             return self.describe(p) + "."
         open_cards = [c.name for c in p.cards[p.first_up():]]
-        text = "%s, de baixo para cima: " % p.name
+        text = "De baixo para cima: "
         if p.down_count():
             text += "%s, " % plural(p.down_count(), "virada")
-        return text + join(open_cards) + "."
+        return "%s%s. %s." % (text, join(open_cards), p.name)
 
     # --- desfazer (A) ----------------------------------------------------------
     def snapshot(self):
