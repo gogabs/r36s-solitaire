@@ -4,7 +4,7 @@ Nada aqui é necessário para jogar: tudo o que aparece na tela também é falad
 (regra do contrato). A tela segue a opção do sistema (SCREEN=0 desliga) e a
 economia de energia (menos quadros por segundo), como no Campo Minado.
 
-`draw_frame(gfx, ...)` só usa a API de desenho do SDK, então roda com o SDK de
+`draw_frame(gfx, ...)` só usa a API de desenho do Mage Core, então roda com o Mage Core de
 verdade, com o gráfico de mentira dos testes e com o do gerador de prévias.
 
 Cores pensadas para contraste (veja docs/graficos.md): dicas em branco sobre

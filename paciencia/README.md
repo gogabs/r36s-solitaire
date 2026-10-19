@@ -57,5 +57,5 @@ python3 tools/gerar_graficos.py         # imagens (precisa do Pillow, só no PC)
 A lógica fica em `paciencia/`: `base.py` tem o que os três jogos dividem
 (pilhas, foco, pegar e soltar, desfazer, dica, leitura da mesa, partida
 salva) e `klondike.py`, `freecell.py` e `spider.py` só as regras de cada um.
-Ela não toca som nem fala; `main.py` liga a partida ao SDK, e `desenho.py`
+Ela não toca som nem fala; `main.py` liga a partida ao Mage Core, e `desenho.py`
 desenha a mesa.

@@ -52,5 +52,5 @@ python3 tools/gerar_graficos.py         # imagens (precisa do Pillow, só no PC)
 ```
 
 A lógica fica em `minado/` (`board.py` a grade, `run.py` a partida) e não
-toca som nem fala; `main.py` liga a partida ao SDK, e `desenho.py` desenha
+toca som nem fala; `main.py` liga a partida ao Mage Core, e `desenho.py` desenha
 a grade.

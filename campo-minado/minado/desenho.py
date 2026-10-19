@@ -6,7 +6,7 @@ que é a que o jogo fala; as outras continuam escondidas. A tela segue a opção
 do sistema (SCREEN=0 desliga) e a economia de energia (menos quadros por
 segundo), como no Dead vs. Alive.
 
-`draw_frame(gfx, ...)` só usa a API de desenho do SDK, então roda com o SDK de
+`draw_frame(gfx, ...)` só usa a API de desenho do Mage Core, então roda com o Mage Core de
 verdade, com o gráfico de mentira dos testes e com o do gerador de prévias.
 
 Cores pensadas para contraste (veja docs/graficos.md): casas fechadas claras e
