@@ -1,7 +1,7 @@
 # Solitários (r36s-solitaire)
 
 Jogos solitaire para o R36S acessível, jogáveis só com som e fala. Cada pasta
-é um jogo da galeria:
+é um jogo do Luma:
 
 | Pasta | Jogo |
 |---|---|
@@ -25,7 +25,7 @@ extra: nada aparece nela sem ser falado.
 
 ## Instalar no console
 
-Com o SDK clonado ao lado deste repositório:
+Com o Mage Core clonado ao lado deste repositório:
 
 ```bash
 ./instalar.sh                                     # todos os jogos

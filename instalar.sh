@@ -1,11 +1,11 @@
 #!/bin/bash
-# Empacota os jogos com a biblioteca Python do SDK e instala no console.
+# Empacota os jogos com a biblioteca Python do Mage Core e instala no console.
 #
 #   ./instalar.sh [host-ssh] [pasta-do-sdk] [jogo...]
 #   padrão: r36s, ../r36s-a11y-sdk (clone de github.com/gogabs/r36s-a11y-sdk)
 #   e todos os jogos (paciencia campo-minado)
 #
-# Não reinicia nada: a galeria percebe os jogos novos sozinha. Com um jogo aberto,
+# Não reinicia nada: o Luma percebe os jogos novos sozinho. Com um jogo aberto,
 # não instala, porque ele carrega os sons sob demanda da pasta instalada.
 set -euo pipefail
 HOST=${1:-r36s}
@@ -18,8 +18,8 @@ SDK_PY="$SDK/python/r36s_a11y"
 if [ ! -d "$SDK_PY" ]; then
   SDK_PY="$HERE/r36s_a11y"
 fi
-[ -d "$SDK_PY" ] || { echo "SDK não encontrado."; exit 1; }
-echo "SDK selecionada: $SDK_PY"
+[ -d "$SDK_PY" ] || { echo "Mage Core não encontrado."; exit 1; }
+echo "Mage Core selecionado: $SDK_PY"
 
 for ID in "${GAMES[@]}"; do
   [ -f "$HERE/$ID/game.json" ] || { echo "Jogo desconhecido: $ID"; exit 1; }

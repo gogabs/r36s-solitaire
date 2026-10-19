@@ -1,5 +1,5 @@
 """Roda o main.py de um jogo com uma Game de mentira: botões entram por
-press(), as falas ficam em said. Usa o Menu de verdade do SDK."""
+press(), as falas ficam em said. Usa o Menu de verdade do Mage Core."""
 import os
 import runpy
 import sys
@@ -41,7 +41,7 @@ class FakeGame:
         FakeGame.instance = self
 
     def _hook(name):
-        def deco(self, fn):   # como no SDK, várias funções por evento
+        def deco(self, fn):   # como no Mage Core, várias funções por evento
             prev = self.handlers.get(name)
             if prev is None:
                 self.handlers[name] = fn

@@ -51,5 +51,5 @@ python3 tools/gerar_graficos.py         # imagens (precisa do Pillow, só no PC)
 ```
 
 A lógica fica em `sudoku/` (`grade.py` a grade, as regras e o gerador,
-`run.py` a partida) e não toca som nem fala; `main.py` liga a partida ao SDK,
+`run.py` a partida) e não toca som nem fala; `main.py` liga a partida ao Mage Core,
 e `desenho.py` desenha a grade.
